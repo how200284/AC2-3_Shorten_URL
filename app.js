@@ -28,16 +28,19 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-if (!req.body.URL) return res.redirect('/')
+  if (!req.body.URL) return res.redirect('/')
 
-URLs.findOne({"originalURL": req.body.URL})
-  .then(data => data ? data : generateURL(req.body.URL))
-  .then(data => {
-    // const randomNumber = data.shortenURL
-    res.render('success', { randomNumber : data.shortenURL })
-  })
-  .catch(error => console.log(error))
+  URLs.findOne({"originalURL": req.body.URL})
+    .then(data => data ? data : generateURL(req.body.URL))
+    .then(data => { res.render('success', { randomNumber : data.shortenURL })})
+    .catch(error => console.log(error))
  })
+
+app.get('/:randomNumber', (req, res) => {
+  URLs.findOne({"shortenURL": req.params.randomNumber})
+    .then(data => res.redirect(data.originalURL))
+    .catch(error => console.log(error))
+})
 
 app.listen( PORT, () => {
   console.log(`This app is running on http://localhost:${PORT}`)
