@@ -15,6 +15,10 @@ db.once('open', () => {
 
 app.engine('hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
+app.use(express.urlencoded({ extended: true }))
+
+const URLs = require('./models/URLs')
+const generateURL = require('./generateURL')
 
 const PORT = 3000
 
@@ -24,8 +28,16 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-  res.render('success')
-})
+if (!req.body.URL) return res.redirect('/')
+
+URLs.findOne({"originalURL": req.body.URL})
+  .then(data => data ? data : generateURL(req.body.URL))
+  .then(data => {
+    // const randomNumber = data.shortenURL
+    res.render('success', { randomNumber : data.shortenURL })
+  })
+  .catch(error => console.log(error))
+ })
 
 app.listen( PORT, () => {
   console.log(`This app is running on http://localhost:${PORT}`)
