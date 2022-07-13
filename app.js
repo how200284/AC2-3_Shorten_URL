@@ -30,8 +30,9 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
   if (!req.body.URL) return res.redirect('/')
 
+  const result = generateURL()
   URLs.findOne({"originalURL": req.body.URL})
-    .then(data => data ? data : generateURL(req.body.URL))
+    .then(data => data ? data : URLs.create({ originalURL: req.body.URL, shortenURL: result }))
     .then(data => { res.render('success', { randomNumber : data.shortenURL })})
     .catch(error => console.log(error))
  })
