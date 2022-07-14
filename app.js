@@ -39,8 +39,9 @@ app.post('/', (req, res) => {
  })
 
 app.get('/:randomNumber', (req, res) => {
-  URLs.findOne({"shortenURL": req.params.randomNumber})
-    .then(data => res.redirect(data.originalURL))
+  const randomNumber = req.params.randomNumber
+  URLs.findOne({"shortenURL": randomNumber})
+    .then(data => data ? res.redirect(data.originalURL) : res.render('fail', { randomNumber } ))
     .catch(error => console.log(error))
 })
 
