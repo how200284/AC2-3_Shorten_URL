@@ -1,26 +1,17 @@
 const express = require('express')
-const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 
+
+require('./config/mongoose')
+const URLs = require('./models/URLs')
+const generateURL = require('./generateURL')
+
+
 const app = express()
-
-mongoose.connect(process.env.MONGODB_URI)
-const db = mongoose.connection
-db.on('error', () => {
-  console.log('MongoDB connect error!')
-})
-db.once('open', () => {
-  console.log('MongoDB connected!')
-})
-
 app.engine('hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
-
-const URLs = require('./models/URLs')
-const generateURL = require('./generateURL')
-
 const PORT = 3000
 
 
@@ -30,7 +21,6 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
   if (!req.body.URL) return res.redirect('/')
-
   const result = generateURL()
   URLs.findOne({"originalURL": req.body.URL})
     .then(data => data ? data : URLs.create({ originalURL: req.body.URL, shortenURL: result }))
