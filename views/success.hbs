@@ -1,4 +1,8 @@
-<h1>Success! Please use this link:</h1>
-<a href="http://localhost:3000/{{ randomNumber}}">http://localhost:3000/{{ randomNumber }}</a>
-<button>Copy</button>
-<a href="/">Shorten Another</a>  {{!-- <button onclick>, or <a href> ? --}}
+<div class="resultBox">
+  <h3>Success! Please use this link:</h3>
+  <a href="http://localhost:3000/{{ randomNumber}}">http://localhost:3000/{{ randomNumber }}</a>
+</div>
+<div>
+  <button id="copyBtn">Copy</button>
+  <button onclick="location.href='/'" id="shortenAnotherBtn">Shorten Another</button>
+</div>

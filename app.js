@@ -16,6 +16,7 @@ db.once('open', () => {
 app.engine('hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
 app.use(express.urlencoded({ extended: true }))
+app.use(express.static('public'))
 
 const URLs = require('./models/URLs')
 const generateURL = require('./generateURL')

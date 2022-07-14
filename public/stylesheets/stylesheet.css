@@ -1,0 +1,63 @@
+.container {
+  margin: 5% auto 0;
+  max-width: 960px;
+  text-align: center;
+}
+
+.form {
+  margin: 20px 0;
+}
+
+.URLinput {
+  display: block;
+  margin: 15px auto;
+  height: 20px;
+  width: 400px;
+}
+
+#shortenBtn {
+  background-color: #0373F9;
+  height: 30px;
+  width: 150px;
+  color: white;
+  border-radius: 5px;
+  border-color: transparent;
+}
+
+#shortenBtn:hover{
+  background-color: blue;
+}
+
+.resultBox {
+  margin: 20px 0;
+}
+
+#copyBtn {
+  background-color: white;
+  height: 30px;
+  width: 150px;
+  color: #0373f9;
+  border-radius: 5px;
+  border-color: #0373f9;
+}
+
+#copyBtn:hover {
+  background-color: #0373f9;
+  color: white;
+  border-color: transparent;
+}
+
+#shortenAnotherBtn {
+  background-color: white;
+  height: 30px;
+  width: 150px;
+  color: #0373f9;
+  border-radius: 5px;
+  border-color: #0373f9;
+}
+
+#shortenAnotherBtn:hover {
+  background-color: #0373f9;
+  color: white;
+  border-color: transparent;
+}
