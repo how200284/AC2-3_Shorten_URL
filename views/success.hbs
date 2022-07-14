@@ -1,8 +1,15 @@
 <div class="resultBox">
   <h3>Success! Please use this link:</h3>
-  <a href="http://localhost:3000/{{ randomNumber}}">http://localhost:3000/{{ randomNumber }}</a>
+  <a id="finalLink" href="http://localhost:3000/{{ randomNumber}}">http://localhost:3000/{{ randomNumber }}</a>
 </div>
 <div>
-  <button id="copyBtn">Copy</button>
+  <button onclick="copyLink()" id="copyBtn">Copy</button>
   <button onclick="location.href='/'" id="shortenAnotherBtn">Shorten Another</button>
 </div>
+
+<script>
+  function copyLink() {
+    const link = document.querySelector('#finalLink').innerText
+    navigator.clipboard.writeText(link)
+  }
+</script>
